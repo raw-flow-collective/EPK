@@ -264,6 +264,47 @@
   .quote-text   { font-size: 1.08rem; font-style: italic; padding-left: 0.5rem; position: relative; z-index: 1; }
   .quote-source { margin-top: 1rem; font-family: var(--font-display); font-size: 0.78rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--a); transition: color 0.3s; }
 
+  /* ══════════════════════════════════════════ SHOWS */
+  #shows { background: var(--cream); transition: background 0.3s; }
+  .shows-list { display: flex; flex-direction: column; gap: 1.5rem; }
+  .show-card {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 1.5rem;
+    align-items: center;
+    border: var(--border);
+    box-shadow: 4px 4px 0 var(--ink);
+    background: var(--card-bg);
+    padding: 1.25rem 1.5rem;
+    transition: background 0.3s, box-shadow 0.3s;
+  }
+  .show-flyer {
+    width: 90px;
+    height: 90px;
+    flex-shrink: 0;
+    border: var(--border);
+    overflow: hidden;
+    background: var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+  .show-flyer img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .show-info { display: flex; flex-direction: column; gap: 0.25rem; }
+  .show-date { font-family: var(--font-display); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--a); transition: color 0.3s; }
+  .show-name { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; }
+  .show-venue { font-size: 0.88rem; color: var(--ink-fade); margin-top: 0.1rem; }
+  .show-link { display: inline-flex; align-items: center; padding: 0.55rem 1.1rem; font-family: var(--font-display); font-size: 0.76rem; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; text-decoration: none; color: var(--d); background: var(--b); border: var(--border); box-shadow: 3px 3px 0 var(--ink); white-space: nowrap; transition: transform 0.12s, box-shadow 0.12s, background 0.3s; }
+  .show-link:hover { transform: translate(-2px,-2px); box-shadow: 5px 5px 0 var(--ink); }
+  .shows-empty { font-size: 0.95rem; color: var(--ink-fade); font-style: italic; }
+  .dark-theme .show-card { box-shadow: 4px 4px 0 var(--ink); }
+
+  @media (max-width: 600px) {
+    .show-card { grid-template-columns: auto 1fr; }
+    .show-link  { grid-column: 1 / -1; }
+  }
+
   /* ══════════════════════════════════════════ RIDER */
   #rider { background: var(--d); transition: background 0.3s; }
   #rider h2, #rider .section-label { color: var(--cream); }
@@ -357,6 +398,7 @@
     <li><a href="#music">Music</a></li>
     <!-- <li><a href="#video">Video</a></li> -->
     <!-- <li><a href="#press">Press</a></li> -->
+    <li><a href="#shows">Shows</a></li>
     <li><a href="#rider">Rider</a></li>
     <li><a href="#contact">Book</a></li>
   </ul>
@@ -468,6 +510,37 @@
 
 
 
+<!-- ════ SHOWS ════ -->
+<section id="shows">
+  <div class="section-inner">
+    <p class="section-label">Live</p>
+    <h2>Upcoming Shows</h2>
+    <div class="shows-list">
+
+      <!-- ── SHOW CARD ──────────────────────────────────────────────────────
+           Duplicate this block for each show.
+           - Replace the img src with your flyer image path (or remove the img tag to show the 📅 emoji)
+           - Fill in the date, show name, and venue
+           - Replace the href="#" on .show-link with your ticket/event URL
+           - Change "Tickets" to "RSVP", "Event Info", etc. as needed
+           - To hide the link button entirely, delete the <a class="show-link"> element
+      ─────────────────────────────────────────────────────────────────── -->
+      <div class="show-card">
+        <div class="show-flyer">
+          <img src="file references/TheUnderGrooveRawFlowCollectiveStankTheory_1800x1800.jpg.webp" alt="Show flyer">
+        </div>
+        <div class="show-info">
+          <span class="show-date">10th August 2026</span>
+          <span class="show-name">The Undergroove, Raw Flow Collective & Stank Theory</span>
+          <span class="show-venue">Pillar - Minneapolis, MN</span>
+        </div>
+        <a href="https://www.pilllar.com/products/music-raw-flow-collective-8-10-2026" class="show-link">Tickets</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ════ PRESS ════ -->
  <!-- PRESS SECTION COMMENTED OUT — remove the surrounding comment markers to restore.>
 <section id="press">
@@ -504,8 +577,8 @@
       <h2>Let's Book a Show</h2>
       <p style="max-width:360px;margin-bottom:1.5rem">Reach out for booking, festival submissions, or press requests.</p>
       <div class="social-row">
-        <!-- 
-        <a href="#" class="social-btn">Instagram</a>
+        <a href="https://www.instagram.com/rawflowcollective" class="social-btn">Instagram</a>
+        <!--
         <a href="#" class="social-btn">Spotify</a>
         <a href="#" class="social-btn">YouTube</a>
         <a href="#" class="social-btn">Facebook</a> 
@@ -569,6 +642,7 @@
    Leave src as "" to keep as placeholder.
 ───────────────────────────────────────── */
 const TRACKS = [
+  { title: "Impossible Odds", album: "Practice Rehearsal - 2026", src: "file references/29may2026 Impossible Odds.mp3" },
   { title: "Sweet Slide", album: "Practice Rehearsal - 2026", src: "file references/Sweet Slide Bday Show 2026.mp3" },
 ];
 
@@ -644,7 +718,7 @@ function setPaused()  { playing = false; btnPlay.innerHTML = '&#9654;';        b
 btnPlay.addEventListener('click', () => {
   if (curIdx === -1) { loadTrack(0, true); return; }
   if (!TRACKS[curIdx].src) { noAudio.style.display = 'block'; return; }
-  isPlaying ? audio.pause() : audio.play().catch(() => {});
+  playing ? audio.pause() : audio.play().catch(() => {});
 });
 
 btnPrev.addEventListener('click', () => loadTrack(curIdx <= 0 ? TRACKS.length-1 : curIdx-1, playing));
